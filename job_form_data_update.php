@@ -1,6 +1,5 @@
 <?php
-	//include the medoo framework
-	require_once('medoo.min.php');
+	require_once 'includes/db_connect.php';
 	
 	//check if the variable value is N/A
 	function Validation($value){
@@ -13,9 +12,6 @@
 	//get the id of the item
 	$job_no  = $_POST['job_no'];
 	$cust_no = $_POST['cust_no'];
-	
-	//medoo framework database
-	$database = new medoo();
 	//tab2
 	//	equipmenttype
 	//	category

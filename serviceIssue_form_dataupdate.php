@@ -19,15 +19,12 @@
 	}
 		
 	//include the medoo framework
-	require_once('medoo.min.php');
+	require_once 'includes/db_connect.php';
 	
 	//get the key of the item
 	$si  = Valiation($_REQUEST['si']); 
 	$ir1 = Valiation($_REQUEST['ir1']); 
 	$ir2 = Valiation($_REQUEST['ir2']);
-	
-	//medoo framework database
-	$database = new medoo();
 	
 	//update the data
 	$database->update('TBL_JOBS_SI',[

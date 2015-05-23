@@ -1,13 +1,10 @@
 <?php
 	//include the medoo framework
-	require_once('medoo.min.php');
+	require_once 'includes/db_connect.php';
+	require_once 'includes/functions.php';
 
 	// get the selected item from the database.
-	$job_no = $_REQUEST['job_no']; 
-	
-	//medoo framework
-	$database = new medoo();
-	
+	$job_no = $_REQUEST['job_no']; 	
 	
 	//access item in the database
 	$data = $database->select('qry_forms_jobs_si_jobs','*',[
@@ -16,12 +13,10 @@
 	
  	$privilege = "";
 	
-	session_start();
+	sec_session_start();
 	//check the privilege of user
-	if($_SESSION['privilege'] == "user")
-	{
+	if($_SESSION['privilege'] == 1)
 		$privilege = "readonly";
-	}
 
 	$content = "
 	    <span style='color:rgb(140,27,27)'><p align='center'> Service Issue Job Form</p></span>

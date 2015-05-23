@@ -1,14 +1,10 @@
 <?php
 
-	//include the medoo framework
-	require_once('medoo.min.php');
+	require_once 'includes/db_connect.php';
 
 	//get the current page and search detail
 	$search = $_REQUEST['search'];
 	$page = $_REQUEST['page'];
-	
-	//MEDOO framework
-	$database = new medoo();
 	
 	// How many adjacent pages should be shown on each side.
 	// How many items to show per page.

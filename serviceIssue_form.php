@@ -1,8 +1,8 @@
 <?php
 	
 	//include the medoo framework
-	require_once('medoo.min.php');
-	
+	require_once 'includes/db_connect.php';
+	require_once 'includes/functions.php';
 	// key of the selected item from the database.
 	$si  = $_REQUEST['SI']; 
 	$ir1 = $_REQUEST['IR1']; 
@@ -11,12 +11,9 @@
 		//admin
 		//user
 	$privilege = "";
-	session_start();
-	if($_SESSION['privilege'] == "user")
+	sec_session_start();
+	if($_SESSION['privilege'] == 1)
 		$privilege = "readonly";
-	
-	//medoo framework
-	$database =  new medoo();
 	
 	//access item in the database
 	$data = $database->select('TBL_JOBS_Si','*',[

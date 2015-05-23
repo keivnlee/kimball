@@ -1,7 +1,9 @@
 <?PHP
+include_once 'includes/functions.php';
 	// if user doesn't log in.
-	session_start();
-	if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
+	//session_start();
+	sec_session_start();
+	if (!login_check()) {
 		header ("Location: login.php");
 	}
 ?>

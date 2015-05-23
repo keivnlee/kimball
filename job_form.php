@@ -1,9 +1,6 @@
 <?php
-	//include the Medoo framework
-	require_once('medoo.min.php');
-	
-	//medoo framework
-	$database = new medoo();
+	require_once 'includes/db_connect.php';
+	require_once 'includes/functions.php';
 	
 	//access item in the database 
 	$data = $database->select('QRY_FORMS_JOBS','*', [
@@ -13,10 +10,10 @@
 		]
 	]);
 
-    //check the privilege
+        //check the privilege
 	$privilege = "";
-	session_start();
-	if($_SESSION['privilege'] == "user")
+	sec_session_start();
+	if($_SESSION['privilege'] == 1)
 		$privilege = "readonly";
 	
 $content = "
@@ -66,6 +63,12 @@ $content = "
 				        <label>CUST_PO:</label>
 				        <input type='text' value='".checkEmpty($data[0]["CUST_PO"])."' name='cust_po' class='text' readonly>
     			    </div>
+        	   	        <span style='margin:300px'>";
+    		//admin and user
+    		if($privilege != "readonly")
+    			$content = $content."<button type='button' onclick='update_job_form()' class='final'>Update</button>";
+    		$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='final'>Cancle</button>
+    		</span>
                 </div>
 	    		<div id=\"view2\" class='tab'>
                     <div>
@@ -104,6 +107,12 @@ $content = "
 					    <label>Parts Rep:</label>
 					    <input type='text' value='".checkEmpty($data[0]["PARTS REP"])."'  name='part_rep' ".$privilege." class='text'>
 	    			</div>
+	    	   	        <span style='margin:300px'>";
+			//admin and user
+			if($privilege != "readonly")
+				$content = $content."<button type='button' onclick='update_job_form()' class='final'>Update</button>";
+			$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='final'>Cancle</button>
+			</span>
 	    		</div>
 	    		<div id=\"view3\" class='tab'>
 	    			<div>	
@@ -138,6 +147,12 @@ $content = "
 					    <label>ServiceHistoryNotes:</label>
 					    <input type='text' value='".checkEmpty($data[0]["SERVICEHISTORYNOTES"])."' name='servicehistorynotes' ".$privilege." class='text'>
 	    			</div>
+	    	   	        <span style='margin:300px'>";
+			//admin and user
+			if($privilege != "readonly")
+				$content = $content."<button type='button' onclick='update_job_form()' class='final'>Update</button>";
+			$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='final'>Cancle</button>
+			</span>
 	   	     	</div>
 	    		<div id=\"view4\" class='tab'>
 	    			<div>
@@ -172,7 +187,7 @@ $content = "
 	    			<div>
 					<label>AttachedJobNotes:</label>
 					<img src='http://www.utvmedia.com/images/layout/PDF_icon_homepage.gif'
-					        onclick='MM_openBrWindow(\"php-file-uploader/index.php\")'>";
+					        onclick='MM_openBrWindow(\"php-file-uploader/index.php\")'>".checkEmpty($data[0]["ATTACHEDJOBNOTES"]);
 	    	    		//$res = explode('#', $data[0]["ATTACHEDJOBNOTES"]);
 				        //$content .= file_upload_section_handler($res[0], 'ATTACHEDJOBNOTES',
 						//$data[0]['JOB_NO'], $data[0]['CUST_NO'], $privilege);
@@ -180,7 +195,7 @@ $content = "
                     <div>
 					<label>JobNoteLink:</label>
 					<img src='http://www.utvmedia.com/images/layout/PDF_icon_homepage.gif'
-					        onclick='MM_openBrWindow(\"php-file-uploader/index.php\")'>";
+					        onclick='MM_openBrWindow(\"php-file-uploader/index.php\")'>".checkEmpty($data[0]["JOBNOTELINK"]);
 					
 				       // $content .= file_upload_section_handler($data[0]["JOBNOTELINK"],
 						//'JOBNOTELINK', $data[0]['JOB_NO'], $data[0]['CUST_NO'], $privilege);
@@ -215,7 +230,7 @@ function checkEmpty($value)
 /*
 	$attribute: LINKNOTE or ATTACHMENTS
  	$path : file path
- */
+ 
 function file_upload_section_handler($path, $att, $job_no, $cust_no, $privilege){
 	$html = "<span id='".$att."section'>";
 	//check if it has attachment	
@@ -245,5 +260,5 @@ function file_upload_section_handler($path, $att, $job_no, $cust_no, $privilege)
 	}
 	return $html.="</span>";
 }
-			
+*/			
 ?>
