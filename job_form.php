@@ -13,6 +13,7 @@
         //check the privilege
 	$privilege = "";
 	sec_session_start();
+	// 1 is user privilege, 2 is admin privilege
 	if($_SESSION['privilege'] == 1)
 		$privilege = "readonly";
 	

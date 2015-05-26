@@ -18,7 +18,7 @@ include_once 'includes/functions.php';
     }
 </script>
 <link rel="stylesheet" type="text/css" href="css/pagination.css">
-<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/job_detail.css">
 <link rel="stylesheet" type="text/css" href="css/tab_content.css"/>
 </head>

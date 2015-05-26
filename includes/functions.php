@@ -33,13 +33,13 @@ function login($username, $password, $database){
 			"username"=>$username,
 			"lpassword"=>$mdpword
 		]
-	]);
+	]);	
 	
 	if( $rows == 1){
 		$_SESSION['username'] = $username;
 		$_SESSION['login_string'] = hash('sha512', $password . $user_browser);
 		$user = $database->select('Login','*',['username'=>$username]);
-		$_SESSION['privilege']= $user['userid'];
+		$_SESSION['privilege']= $user[0]['userid'];
 		return true;
 	}else
 		return false;
