@@ -2,7 +2,6 @@
 	//include the medoo framework
 	require_once 'includes/db_connect.php';
 
-
 	//get the currentpage and search detail
 	$page = $_REQUEST['page'];
 	$search = $_REQUEST['search'];
@@ -84,7 +83,7 @@
 		$pagination .= "<div class=\"pagination\">";
 		//previous button
 		if ($page > 1) 
-			$pagination .= "<a href=\"#\" onclick='load_sericeIssueJob_table($prev)'>prev</a>";
+			$pagination .= "<a href=\"#\" onclick='load_serviceIssueJob_table($prev)'>prev</a>";
 		else
 			$pagination .= "<span class=\"disabled\">prev</span>";	
 		
@@ -96,7 +95,7 @@
 				if ($counter == $page)
 					$pagination.= "<span class=\"current\">$counter</span>";
 				else
-					$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table($counter)'>$counter</a>";					
+					$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table($counter)'>$counter</a>";					
 			}
 		}
 		elseif($lastpage > 5 + ($adjacents * 2))	//enough pages to hide some
@@ -109,48 +108,48 @@
 					if ($counter == $page)
 						$pagination.= "<span class=\"current\">$counter</span>";
 					else
-						$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table($counter)'>$counter</a>";					
+						$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table($counter)'>$counter</a>";					
 				}
 				$pagination.= "...";
-				$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table($lpm1)'>$lpm1</a>";
-				$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table($lastpage)'>$lastpage</a>";		
+				$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table($lpm1)'>$lpm1</a>";
+				$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table($lastpage)'>$lastpage</a>";		
 			}
 			//in middle; hide some front and some back
 			elseif($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2))
 			{
-				$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table(1)'>1</a>";
-				$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table(2)'>2</a>";
+				$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table(1)'>1</a>";
+				$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table(2)'>2</a>";
 				$pagination.= "...";
 				for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++)
 				{
 					if ($counter == $page)
 						$pagination.= "<span class=\"current\">$counter</span>";
 					else
-						$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table($counter)'>$counter</a>";					
+						$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table($counter)'>$counter</a>";					
 				}
 				$pagination.= "...";
-				$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table($lpm1)'>$lpm1</a>";
-				$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table($lastpage)'>$lastpage</a>";		
+				$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table($lpm1)'>$lpm1</a>";
+				$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table($lastpage)'>$lastpage</a>";		
 			}
 			//close to end; only hide early pages
 			else
 			{
-				$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table(1)'>1</a>";
-				$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table(2)'>2</a>";
+				$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table(1)'>1</a>";
+				$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table(2)'>2</a>";
 				$pagination.= "...";
 				for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++)
 				{
 					if ($counter == $page)
 						$pagination.= "<span class=\"current\">$counter</span>";
 					else
-						$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table($counter)'>$counter</a>";					
+						$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table($counter)'>$counter</a>";					
 				}
 			}
 		}
 		
 		//next button
 		if ($page < $counter - 1) 
-			$pagination.= "<a href=\"#\" onclick='load_sericeIssueJob_table($next)'>next</a>";
+			$pagination.= "<a href=\"#\" onclick='load_serviceIssueJob_table($next)'>next</a>";
 		else
 			$pagination.= "<span class=\"disabled\">next</span>";
 		$pagination.= "</div>\n";		

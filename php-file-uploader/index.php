@@ -1,3 +1,7 @@
+<?
+	
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +9,7 @@
     <title>File manager</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="boostrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
    
   </head>
 

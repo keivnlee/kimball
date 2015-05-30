@@ -12,15 +12,20 @@ include_once 'includes/functions.php';
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="js/index_support.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
     function MM_openBrWindow(theURL) { //v2.0
         window.open(theURL, 'google', 'width = 1000, height=600;');
+    }
+    function open_file_manager(jobid, table, attribute){
+    	window.open("FileManager/index.php?jobid="+jobid+"&tableid="+table+"&attribute="+attribute, 'FileManager', 'toolbar=no, scrollbars=yes, resizable=yes,width = 1000, height=600;');
     }
 </script>
 <link rel="stylesheet" type="text/css" href="css/pagination.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/job_detail.css">
 <link rel="stylesheet" type="text/css" href="css/tab_content.css"/>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>

@@ -13,7 +13,7 @@
         //check the privilege
 	$privilege = "";
 	sec_session_start();
-	// 1 is user privilege, 2 is admin privilege
+	// 1 is user privilege, 2 is admin 
 	if($_SESSION['privilege'] == 1)
 		$privilege = "readonly";
 	
@@ -67,8 +67,8 @@ $content = "
         	   	        <span style='margin:300px'>";
     		//admin and user
     		if($privilege != "readonly")
-    			$content = $content."<button type='button' onclick='update_job_form()' class='final'>Update</button>";
-    		$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='final'>Cancle</button>
+    			$content = $content."<button type='button' onclick='update_job_form()' class='btn btn-danger'>Update</button>";
+    		$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='btn btn-success'>Cancle</button>
     		</span>
                 </div>
 	    		<div id=\"view2\" class='tab'>
@@ -111,8 +111,8 @@ $content = "
 	    	   	        <span style='margin:300px'>";
 			//admin and user
 			if($privilege != "readonly")
-				$content = $content."<button type='button' onclick='update_job_form()' class='final'>Update</button>";
-			$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='final'>Cancle</button>
+				$content = $content."<button type='button' onclick='update_job_form()' class='btn btn-danger'>Update</button>";
+			$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='btn btn-success'>Cancle</button>
 			</span>
 	    		</div>
 	    		<div id=\"view3\" class='tab'>
@@ -146,13 +146,13 @@ $content = "
 	    			</div>
 	    			<div>
 					    <label>ServiceHistoryNotes:</label>
-					    <input type='text' value='".checkEmpty($data[0]["SERVICEHISTORYNOTES"])."' name='servicehistorynotes' ".$privilege." class='text'>
+					    <textarea type='text' name='servicehistorynotes' ".$privilege." class='text'>".checkEmpty($data[0]["SERVICEHISTORYNOTES"])."</textarea>
 	    			</div>
 	    	   	        <span style='margin:300px'>";
 			//admin and user
 			if($privilege != "readonly")
-				$content = $content."<button type='button' onclick='update_job_form()' class='final'>Update</button>";
-			$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='final'>Cancle</button>
+				$content = $content."<button type='button' onclick='update_job_form()' class='btn btn-danger'>Update</button>";
+			$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='btn btn-success'>Cancle</button>
 			</span>
 	   	     	</div>
 	    		<div id=\"view4\" class='tab'>
@@ -183,30 +183,33 @@ $content = "
 	   	 		    <div>
 					    <label>ID:</label>
 					    <input type='text' value='".checkEmpty($data[0]["ID"])."' name='id' ".$privilege." class='text'>
-				    </div>
-	    			
-	    			<div>
-					<label>AttachedJobNotes:</label>
-					<img src='http://www.utvmedia.com/images/layout/PDF_icon_homepage.gif'
-					        onclick='MM_openBrWindow(\"php-file-uploader/index.php\")'>".checkEmpty($data[0]["ATTACHEDJOBNOTES"]);
-	    	    		//$res = explode('#', $data[0]["ATTACHEDJOBNOTES"]);
-				        //$content .= file_upload_section_handler($res[0], 'ATTACHEDJOBNOTES',
-						//$data[0]['JOB_NO'], $data[0]['CUST_NO'], $privilege);
-                    $content .="
-                    <div>
-					<label>JobNoteLink:</label>
-					<img src='http://www.utvmedia.com/images/layout/PDF_icon_homepage.gif'
-					        onclick='MM_openBrWindow(\"php-file-uploader/index.php\")'>".checkEmpty($data[0]["JOBNOTELINK"]);
-					
-				       // $content .= file_upload_section_handler($data[0]["JOBNOTELINK"],
-						//'JOBNOTELINK', $data[0]['JOB_NO'], $data[0]['CUST_NO'], $privilege);
-                    $content .= "</div>
-	    		    </div>
-    	   	        <span style='margin:300px'>";
+				    </div>";
+				//<label>AttachedJobNotes:</label>
+				//<img src='http://www.utvmedia.com/images/layout/PDF_icon_homepage.gif'
+				 //       onclick='MM_openBrWindow(\"php-file-uploader/index.php\")'>".checkEmpty($data[0]["ATTACHEDJOBNOTES"]);
+		    //for attached Job Noets
+		    $content .= "<div><label>AttachedJobNotes:</label>";
+		    if($privilege == "readonly")
+			// give user permission to read file
+			$content .= user_parse_path($data[0]["ATTACHEDJOBNOTES"]);
+		    else 
+		        // give admin permission to read file 
+			$content .= admin_parse_path($data[0]["ATTACHEDJOBNOTES"],checkEmpty($data[0]["JOB_NO"]), 1,'ATTACHEDJOBNOTES');	
+		    $content .= "</div>";
+		    // for job note link		
+                    $content .="<div><label>JobNoteLink:</label>";
+		    if($privilege == "readonly")
+			// give user permission to read file
+			$content .= user_parse_path($data[0]["JOBNOTELINK"]);
+		    else 
+		        // give admin permission to read file 
+			$content .= admin_parse_path($data[0]["JOBNOTELINK"],checkEmpty($data[0]["JOB_NO"]), 1,'JOBNOTELINK');
+                    $content .= "</div><span style='margin:300px'>";
+		    
 		//admin and user
 		if($privilege != "readonly")
-			$content = $content."<button type='button' onclick='update_job_form()' class='final'>Update</button>";
-		$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='final'>Cancle</button>
+			$content = $content."<button type='button' onclick='update_job_form()' class='btn btn-danger'>Update</button>";
+		$content = $content."<button type='button' onclick='cancle()' style='margin-left:1px' class='btn btn-success'>Cancle</button>
 		</span>
 		</div>
 		</div>

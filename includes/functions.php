@@ -82,4 +82,73 @@ function esc_url($url) {
         return $url;
     }
 }
+
+/***************************************************************/
+
+function user_parse_path($path) {
+	if ('' == $path){
+	   return $path;
+	}
+	$paths = explode('#',$path);
+	$content ="";
+	foreach($paths as $p){
+		//if $p is empty skip current loop.
+		if(empty($p) || $p == '.' || $p == '..' || $p == ' ') continue;
+		//case 1 use /
+		if(!empty(strripos($p, '/')))
+			$index = strripos($p, '/')+1;//escape the '/' character.
+		//case 2 user \
+		else if(!empty(strripos($p, '\\')))
+			$index = strripos($p, '\\')+1;//escape the '\' character.
+		else 
+			$index = 0;
+		
+		$file = substr($p, $index);
+		
+		$ext = pathinfo($p, PATHINFO_EXTENSION);
+		$filename = pathinfo($p, PATHINFO_FILENAME);
+		
+	       	if($ext == 'pdf'){
+			$content .= "<div class=\"row\"><div class=\"col-md-3\"><div class=\"thumbnail\" onclick=\"MM_openBrWindow('".$p."')\">
+				<img src='../img/pdf.png' alt=\"...\"><div class=\"caption\" style=\"margin:aut\"><p align='center'>".$file."</p>
+				</div></div></div></div>";
+		}else{
+			$content .= "<div class=\"row\"><div class=\"col-md-3\"><div class=\"thumbnail\" onclick=\"MM_openBrWindow('".$p."')\">
+				<img src='".$p."' alt=\"...\"><div class=\"caption\" style=\"margin:aut\"><p align='center'>".$file."</p>
+				</div></div></div></div>";
+		}
+	}
+	return $content;
+}
+
+function admin_parse_path($path, $jobid, $table,$attribute){
+	if ('' == $path){
+	   return $path;
+	}
+	$paths = explode('#',$path);
+	$content ="";
+	foreach($paths as $p){
+		//if $p is empty skip current loop.
+		if(empty($p) || $p == '.' || $p == '..' || $p == ' ') continue;
+		//case 1 use /
+		if(!empty(strripos($p, '/')))
+			$index = strripos($p, '/')+1;//escape the '/' character.
+		//case 2 user \
+		else if(!empty(strripos($p, '\\')))
+			$index = strripos($p, '\\')+1;//escape the '\' character.
+		else 
+			$index = 0;
+		
+		$file = substr($p, $index);
+		
+		$ext = pathinfo($p, PATHINFO_EXTENSION);
+		$filename = pathinfo($p, PATHINFO_FILENAME);
+		$content .= "<a href='".$p."'>".$file."</a> &nbsp;";
+		
+	}
+	$content .= "<button type='button' class='btn btn-default' onclick=\"open_file_manager('".$jobid."','".$table."','".$attribute."')\">Edit</button>";
+	
+	return $content;
+}
+
 ?>

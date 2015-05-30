@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$tmpName  = $_FILES['file']['tmp_name'];
 	$error    = $_FILES['file']['error'];
 	$size     = $_FILES['file']['size'];
-    $ext	  = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+        $ext	  = strtolower(pathinfo($name, PATHINFO_EXTENSION));
   
 	switch ($error) {
 		case UPLOAD_ERR_OK:
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				$response = 'Invalid file extension.';
 			}
 			//validate file size
-			if ( $size/1024/1024 > 6 ) {
+			if ( $size/1024/1024 > 10 ) {
 				$valid = false;
 				$response = 'File size is exceeding maximum allowed size.';
 			}
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			if ($valid) {
 				$targetPath =  dirname( __FILE__ ) . DIRECTORY_SEPARATOR. 'uploads' . DIRECTORY_SEPARATOR. $name;
 				move_uploaded_file($tmpName,$targetPath); 
-				header( 'Location: index.php' ) ;
+				//header( 'Location: index.php' ) ;
 				exit;
 			}
 			break;

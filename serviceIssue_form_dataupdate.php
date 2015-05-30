@@ -6,9 +6,6 @@
 		"IRMANUFACTURER"=>Valiation($_POST['irmanufacturer']),
 		"STANDARD"=>Valiation($_POST['standard']),
 		"APPLICATION"=>Valiation($_POST['application'])
-
-
-
 ***********************************************************************/
 	//check if the variable value is N/A
 	function Valiation($value){
@@ -45,9 +42,4 @@
 		"IR2"=>$ir2
 		]
 	]);	
-	
-	var_dump($database->log());
-	
-
-	
 ?>

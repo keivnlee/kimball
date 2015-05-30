@@ -99,7 +99,7 @@
 					</div>
 					<div>
 						<label>ServiceHistoryNotes:</label>
-						<textarea name='servicehistorynotes' ".$privilege." class='text'> ".checkEmpty($data[0]["SERVICEHISTORYNOTES"])." </textarea>
+						<textarea  rows ='50' name='servicehistorynotes' ".$privilege." class='text'> ".checkEmpty($data[0]["SERVICEHISTORYNOTES"])." </textarea>
 					</div>
 				</div>
 				<div id=\"view3\" class='tab'>
@@ -118,18 +118,7 @@
 					<div>
 						<label>MANUFACTURERIR:</label>
 						<input type='text' value='".checkEmpty($data[0]["MANUFACTURERIR"])."' name='manufatureir' ".$privilege." class='text'>
-					</div>
-					<div>
-						<label>ATTACHEDJOBNOTES:</label>
-						<img src='http://www.utvmedia.com/images/layout/PDF_icon_homepage.gif'
-						        onclick='MM_openBrWindow(\"php-file-uploader/index.php\")'>
-					</div>
-					<div>
-						<label>ATTACHMENTS:</label>
-						<img src='http://www.utvmedia.com/images/layout/PDF_icon_homepage.gif'
-						        onclick='MM_openBrWindow(\"php-file-uploader/index.php\")'>
-					</div>
-					<div>
+					</div><div>
 						<label>INTERNETLINK:</label>
 						<input type='text' value='".checkEmpty($data[0]["INTERNETLINK"])."' name='internetlink' ".$privilege." class='text'> 
 					</div>
@@ -138,11 +127,24 @@
 						<label>QTY_BACKORDER:</label>
 						<input type='text' value='".checkEmpty($data[0]["QTY_BACKORDER"])."' name='qty_backorder' ".$privilege." class='text'>
 					</div>
-				</div>
-				<span style='margin:300px'>";
+					<div>
+						<label>ATTACHMENTS:</label>
+						<input type='text' value='".checkEmpty($data[0]["ATTACHMENTS"])."' name='qty_backorder' ".$privilege." class='text'>
+					</div>
+					<div>
+						<label>ATTACHEDJOBNOTES:</label>";
+			    	if($privilege == "readonly")
+			    		// give user permission to read file
+			    		$content .= user_parse_path($data[0]["ATTACHEDJOBNOTES"]);
+			    	 else 
+			    	        // give admin permission to read file 
+			    		$content .= "";	
+				$content .= "</div>";
+				
+				$content .= "</div><span style='margin:300px'>";
 				if($privilege != "readonly")
-					$content.="<button type='button' onclick='update_serviceIssueJob_form()' class='final'>Update</button>";
-	    		    	$content .="<button type='button' onclick='cancle()' style='margin-left:1px' class='final'>Cancle</button>
+					$content.="<button type='button' onclick='update_serviceIssueJob_form()' class='btn btn-danger'>Update</button>";
+	    		    	$content .="<button type='button' onclick='cancle()' style='margin-left:1px' class='btn btn-success'>Cancle</button>
 				</span>
 	    		 </div>
 	    </form>";

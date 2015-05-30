@@ -29,7 +29,7 @@ $content = "<span style='color:rgb(140,27,27)'><p align='center'> Service Issue 
 	    <form style=\"padding:3px; margin:3px\" action='serviceIssue_form_dataupdate.php' id='serviceIssue_form' >
 	    	<div>
 			<label>SI:</label>
-			 <input type='text' value='".checkEmpty($data[0]['SI'])."' class ='text' name='si' ".$privilege.">
+			 <input type='text' value='".checkEmpty($data[0]['SI'])."' class ='text' name='si'  readonly>
 		</div>
 		<div>
 			<label>ServiceNotes:</label>
@@ -45,11 +45,11 @@ $content = "<span style='color:rgb(140,27,27)'><p align='center'> Service Issue 
 		</div>
 		<div>
 			<label>IR1:</label>
-			<input type='text' name='ir1' class ='text' value='".checkEmpty($data[0]['IR1'])."' ".$privilege.">
+			<input type='text' name='ir1' class ='text' value='".checkEmpty($data[0]['IR1'])."' readonly>
 		</div>
 		<div>
 			<label>IR2:</label>
-			<input type='text' name='ir2' class ='text' value='".checkEmpty($data[0]['IR2'])."' ".$privilege.">
+			<input type='text' name='ir2' class ='text' value='".checkEmpty($data[0]['IR2'])."' readonly>
 		</div>
 		<div>
 			<label>IRMANAGER:</label>
@@ -70,8 +70,8 @@ $content = "<span style='color:rgb(140,27,27)'><p align='center'> Service Issue 
 		<div>	
 			<span style='margin:300px'> ";
 			if($privilege != "readonly")
-		    		$content .= "<button type='button' onclick='update_serviceIssue_form()' class='final'>Update</button>";
-			$content .="<button type='button' onclick='cancle()' style='margin-left:1px' class='final'>Cancle</button>
+		    		$content .= "<button type='button' onclick='update_serviceIssue_form()' class='btn btn-danger'>Update</button>";
+			$content .="<button type='button' onclick='cancle()' style='margin-left:1px' class='btn btn-success'>Cancle</button>
 		 	</span>
 		</div>
 			

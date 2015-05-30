@@ -29,7 +29,8 @@
 		"MANAGERIR"=>Validation($_POST['managerir']),
 		"MANUFACTURERIR"=>Validation($_POST['manufatureir']),
 		"INTERNETLINK"=>Validation($_POST['internetlink']),
-		"QTY_BACKORDER"=>Validation($_POST['qty_backorder'])
+		"QTY_BACKORDER"=>Validation($_POST['qty_backorder']),
+		"SERVICEHISTORYNOTES"=>Validation($_POST['servicehistorynotes'])
 	],[
 		"AND"=>[
 		"JOB_NO"=>$job_no,

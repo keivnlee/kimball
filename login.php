@@ -16,7 +16,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	
 	if(login($uname, $pword, $database)){
 		header('Location:index.php');
-		print $_SESSION['privilege'];
 	}
 	else{
 		$errorMessage = "Error logging on";

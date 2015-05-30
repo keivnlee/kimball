@@ -1,6 +1,7 @@
 /**
  * Created by lizhimin on 3/23/15.
  */
+
 function toggle_job_detail_items(id)
 {
     id.style.display='block';
@@ -255,3 +256,4 @@ function changeHappen(id)
 {
     id.value = true;
 }
+
