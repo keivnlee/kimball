@@ -122,33 +122,54 @@ function user_parse_path($path) {
 }
 
 function admin_parse_path($path, $jobid, $table,$attribute){
-	if ('' == $path){
-	   return $path;
-	}
-	$paths = explode('#',$path);
 	$content ="";
-	foreach($paths as $p){
-		//if $p is empty skip current loop.
-		if(empty($p) || $p == '.' || $p == '..' || $p == ' ') continue;
-		//case 1 use /
-		if(!empty(strripos($p, '/')))
-			$index = strripos($p, '/')+1;//escape the '/' character.
-		//case 2 user \
-		else if(!empty(strripos($p, '\\')))
-			$index = strripos($p, '\\')+1;//escape the '\' character.
-		else 
-			$index = 0;
+	if ('' != $path){
+		$paths = explode('#',$path);
+		foreach($paths as $p){
+			//if $p is empty skip current loop.
+			if(empty($p) || $p == '.' || $p == '..' || $p == ' ') continue;
+			//case 1 use /
+			if(!empty(strripos($p, '/')))
+				$index = strripos($p, '/')+1;//escape the '/' character.
+			//case 2 user \
+			else if(!empty(strripos($p, '\\')))
+				$index = strripos($p, '\\')+1;//escape the '\' character.
+			else 
+				$index = 0;
+			
+			$file = substr($p, $index);
+			$ext = pathinfo($p, PATHINFO_EXTENSION);
+			$filename = pathinfo($p, PATHINFO_FILENAME);
+			$content .= "<a href='".$p."'>".$file."</a> &nbsp;";
 		
-		$file = substr($p, $index);
-		
-		$ext = pathinfo($p, PATHINFO_EXTENSION);
-		$filename = pathinfo($p, PATHINFO_FILENAME);
-		$content .= "<a href='".$p."'>".$file."</a> &nbsp;";
-		
+		}
 	}
 	$content .= "<button type='button' class='btn btn-default' onclick=\"open_file_manager('".$jobid."','".$table."','".$attribute."')\">Edit</button>";
 	
 	return $content;
 }
+
+function filepath_database_insert($database, $jobid, $tableid, $attribute, $path){
+	$table 	= "";
+	//print $tableid;
+	switch($tableid){
+		case 1:
+		$table = "QRY_FORMS_JOBS";
+		break;
+		case 2:
+		$table = "qry_forms_jobs_si_jobs";
+		break;
+		case 3:
+		$table = "TBL_JOBS_Si";
+		break;
+		default:
+		exit;
+	}
+	
+	$paths 	= $database->select($table,$attribute, ["JOB_NO"=>$jobid]);
+	$paths = $paths.$path;
+	$database->update($table, [$attribute=>$path],["JOB_NO"=>$jobid]);
+}
+
 
 ?>

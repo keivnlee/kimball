@@ -48,8 +48,9 @@
 			exit;
 		}
 	       
-	       
+	       	
 		$paths = $database->select($table,$attribute, ["JOB_NO"=>$jobid]);
+		print $paths[0];
 	    	$paths = explode('#',$paths[0]);
 		foreach($paths as $p){
 			//if $p is empty skip current loop.
@@ -113,7 +114,9 @@
 				  <div class="form-group">
 
 				    <input type="file" name="file">
-				    <input type='hidden' name='tableid' value=<?php echo $jobid."#".$tableid."#".$attribute;?>>
+				    <input type='hidden' name='jobid' 		value=<?php echo $jobid;?>>
+				    <input type='hidden' name='tableid' 	value=<?php echo $tableid;?>>
+				    <input type='hidden' name='attribute'	value=<?php echo $attribute;?>>
 				    <p class="help-block">Only jpg,jpeg,png and pdf file with maximum size of 10 MB is allowed.</p>
 				  </div>
 				  <input type="submit" class="btn btn-lg btn-primary" value="Upload">

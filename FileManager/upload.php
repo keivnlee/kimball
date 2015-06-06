@@ -1,4 +1,7 @@
 <?php
+require_once '../includes/db_connect.php';
+require_once '../includes/functions.php';
+
 //turn on php error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -10,7 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$error    = $_FILES['file']['error'];
 	$size     = $_FILES['file']['size'];
         $ext	  = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-  
+  	$jobid    = $_POST['jobid'];
+	$tableid  = $_POST['tableid'];
+	$attribute= $_POST['attribute'];
 	switch ($error) {
 		case UPLOAD_ERR_OK:
 			$valid = true;
@@ -27,9 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			//upload file
 			if ($valid) {
 				$targetPath =  dirname( __FILE__ ) . DIRECTORY_SEPARATOR. 'uploads' . DIRECTORY_SEPARATOR. $name;
-				move_uploaded_file($tmpName,$targetPath); 
-				//header( 'Location: index.php' ) ;
-				exit;
+				if(move_uploaded_file($tmpName,$targetPath)){ 
+					filepath_database_insert($database, $jobid, $tableid, $attribute, $targetPath);
+					header( "Location: index.php?jobid=".$jobid."&tableid=".$tableid."&attribute=".$attribute) ;
+					print "success";var_dump( $database->log() );
+					exit;
+				}
 			}
 			break;
 		case UPLOAD_ERR_INI_SIZE:
